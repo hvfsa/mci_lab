@@ -1,0 +1,13 @@
+# Ignore compiled objects and binaries
+*.o
+*.out
+*.exe
+
+# Ignore build folder
+/build/
+
+# Ignore logs and editor backup files
+*.log
+*.swp
+
+
