@@ -111,8 +111,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    // Create a character array (string) containing the message to send
     char msg[]="Hello World\r\n";
+      // - &huart1: pointer to UART1 handle
+      // - (uint8_t*)msg: the message cast to uint8_t pointer
+      // - strlen(msg): length of the message
+      // - HAL_MAX_DELAY: block until the transmission is complete
     HAL_UART_Transmit(&huart1,(uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+      // Delay for 1000 milliseconds (1 second) before repeating
     HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
