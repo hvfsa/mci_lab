@@ -1,0 +1,152 @@
+[
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles/Lab3.dir/Core/Src/main.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/main.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/main.c",
+  "output": "CMakeFiles/Lab3.dir/Core/Src/main.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles/Lab3.dir/Core/Src/stm32f3xx_it.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/stm32f3xx_it.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/stm32f3xx_it.c",
+  "output": "CMakeFiles/Lab3.dir/Core/Src/stm32f3xx_it.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles/Lab3.dir/Core/Src/stm32f3xx_hal_msp.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/stm32f3xx_hal_msp.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/stm32f3xx_hal_msp.c",
+  "output": "CMakeFiles/Lab3.dir/Core/Src/stm32f3xx_hal_msp.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles/Lab3.dir/Core/Src/sysmem.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/sysmem.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/sysmem.c",
+  "output": "CMakeFiles/Lab3.dir/Core/Src/sysmem.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles/Lab3.dir/Core/Src/syscalls.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/syscalls.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/syscalls.c",
+  "output": "CMakeFiles/Lab3.dir/Core/Src/syscalls.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -x assembler-with-cpp -MMD -MP -g -o CMakeFiles/Lab3.dir/startup_stm32f303xc.s.obj -c /home/administrator/mci_lab/Lab3/startup_stm32f303xc.s",
+  "file": "/home/administrator/mci_lab/Lab3/startup_stm32f303xc.s",
+  "output": "CMakeFiles/Lab3.dir/startup_stm32f303xc.s.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f3xx.c.obj -c /home/administrator/mci_lab/Lab3/Core/Src/system_stm32f3xx.c",
+  "file": "/home/administrator/mci_lab/Lab3/Core/Src/system_stm32f3xx.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f3xx.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_usb.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_usb.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_usb.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_usb.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_exti.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_exti.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_exti.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_exti.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd.c.obj"
+},
+{
+  "directory": "/home/administrator/mci_lab/Lab3",
+  "command": "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc -DDEBUG -DSTM32F303xC -DUSE_HAL_DRIVER -I/home/administrator/mci_lab/Lab3/Core/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I/home/administrator/mci_lab/Lab3/Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c.obj -c /home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c",
+  "file": "/home/administrator/mci_lab/Lab3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c.obj"
+}
+]
