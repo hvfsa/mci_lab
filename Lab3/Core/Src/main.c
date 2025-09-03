@@ -125,75 +125,75 @@ uint8_t hexMap[16][7] = {
 };
 
 // //Task 2
-// uint8_t IDMap[5][7] = {
-// {0,0,0,0,0,0,1}, //0
-// {0,0,0,0,0,0,0}, //8
-// {0,0,0,0,0,0,0}, //8
-// {0,0,0,1,1,1,1}, //7
-// {0,0,0,0,0,0,0} //8
-// };
+uint8_t IDMap[5][7] = {
+{0,0,0,0,0,0,1}, //0
+{0,0,0,0,0,0,0}, //8
+{0,0,0,0,0,0,0}, //8
+{0,0,0,1,1,1,1}, //7
+{0,0,0,0,0,0,0} //8
+};
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int idindex=0;
-  int counter=0;
-  int number;
+  int idindex=0;//task 2
+  int counter=0; //task 3
+  int number; //task4
   while (1)
   {
     /* USER CODE END WHILE */
     //Task 1:
-    // for (int i=0;i<=15;i++){
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, hexMap[i][0]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, hexMap[i][1]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, hexMap[i][2]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, hexMap[i][3]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, hexMap[i][4]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, hexMap[i][5]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, hexMap[i][6]);
-    // HAL_Delay(2000);
-    // }
+    for (int i=0;i<=15;i++){
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, hexMap[i][0]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, hexMap[i][1]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, hexMap[i][2]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, hexMap[i][3]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, hexMap[i][4]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, hexMap[i][5]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, hexMap[i][6]);
+    HAL_Delay(2000);
+    }
 
     //Task 2:
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, IDMap[idindex][0]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, IDMap[idindex][1]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, IDMap[idindex][2]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, IDMap[idindex][3]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, IDMap[idindex][4]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, IDMap[idindex][5]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, IDMap[idindex][6]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, IDMap[idindex][0]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, IDMap[idindex][1]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, IDMap[idindex][2]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, IDMap[idindex][3]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, IDMap[idindex][4]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, IDMap[idindex][5]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, IDMap[idindex][6]);
 
-    // if ( HAL_GPIO_ReadPin (GPIOA , GPIO_PIN_0 )==GPIO_PIN_SET) {
-    //     /* USER CODE BEGIN 3 */
-    //     HAL_Delay(200); // Debounce
-    //     idindex = (idindex + 1) % 5; // Increment with wrap-around
-    //     while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
-    //     HAL_Delay(50);
-    //   }
+    if ( HAL_GPIO_ReadPin (GPIOA , GPIO_PIN_0 )==GPIO_PIN_SET) {
+        /* USER CODE BEGIN 3 */
+        HAL_Delay(200); // Debounce
+        idindex = (idindex + 1) % 5; // Increment with wrap-around
+        while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
+        HAL_Delay(50);
+      }
     
 
     //Task 3:
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, hexMap[counter][0]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, hexMap[counter][1]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, hexMap[counter][2]);
-    // HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, hexMap[counter][3]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, hexMap[counter][4]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, hexMap[counter][5]);
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, hexMap[counter][6]);
-    // if ( HAL_GPIO_ReadPin (GPIOA , GPIO_PIN_0 )==GPIO_PIN_SET) {
-    //     /* USER CODE BEGIN 3 */
-    //     HAL_Delay(200); // Debounce
-    //     counter = (counter + 1) % 10; // Increment with wrap-around
-    //     while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
-    //     HAL_Delay(50);
-    //   }
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, hexMap[counter][0]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, hexMap[counter][1]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, hexMap[counter][2]);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, hexMap[counter][3]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, hexMap[counter][4]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, hexMap[counter][5]);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, hexMap[counter][6]);
+    if ( HAL_GPIO_ReadPin (GPIOA , GPIO_PIN_0 )==GPIO_PIN_SET) {
+        /* USER CODE BEGIN 3 */
+        HAL_Delay(200); // Debounce
+        counter = (counter + 1) % 10; // Increment with wrap-around
+        while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
+        HAL_Delay(50);
+      }
 
-    // if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET)
-    // {
-    //     HAL_Delay(200); // Debounce
-    //     counter = (counter == 0) ? 9 : counter - 1; // Decrement with wrap-around
-    //     while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
-    //     HAL_Delay(50);
-    // }
+    if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET)
+    {
+        HAL_Delay(200); // Debounce
+        counter = (counter == 0) ? 9 : counter - 1; // Decrement with wrap-around
+        while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET); // Wait for release
+        HAL_Delay(50);
+    }
 
 
     //Task 4:

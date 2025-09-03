@@ -115,45 +115,45 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   //Task 0 message
-  // char message[] = "Hello World\r\n"; // define the msg to print
+  char message[] = "Hello World\r\n"; // define the msg to print
 
   //Task 1 values
-  // int x = 42;
-  // float y = 3.14f;
+  int x = 42;
+  float y = 3.14f;
 
   // //Task 2 values
-  // int a=2;
-  // int b=3;
-  // int LHS=(a + b) * (a + b);
-  // int RHS= a*a + b*b + 2*a*b;
+  int a=2;
+  int b=3;
+  int LHS=(a + b) * (a + b);
+  int RHS= a*a + b*b + 2*a*b;
 
-  // //Task 3 definition:
-  // char str[] = "Microcontrollers";
-  // char encrypted[100];
-  // char decrypted[100];
-  // int key=8878;
-  // int i;
-  // for(i = 0; i < strlen(str); i += 1) {  //encryption loop
-  //     encrypted[i]= str[i] + (key % 256);
-  // }
-  // encrypted[i] = '\0';
-  // for(i = 0; i < strlen(str); i += 1) {  //decryption loop
-  //     decrypted[i]= encrypted[i] - (key % 256);
-  // }
-  // decrypted[i] = '\0'; //null operator
+  //Task 3 definition:
+  char str[] = "Microcontrollers";
+  char encrypted[100];
+  char decrypted[100];
+  int key=8878;
+  int i;
+  for(i = 0; i < strlen(str); i += 1) {  //encryption loop
+      encrypted[i]= str[i] + (key % 256);
+  }
+  encrypted[i] = '\0';
+  for(i = 0; i < strlen(str); i += 1) {  //decryption loop
+      decrypted[i]= encrypted[i] - (key % 256);
+  }
+  decrypted[i] = '\0'; //null operator
 
   //Task 4 Defiition:
-  // int A[2][2] = { {1, 2}, {3, 4} };
-  // int B[2][2] = { {5, 6}, {7, 8} };
-  // int C[2][2];
-  // for (int i=0;i<2; i++){
-  //   for (int j=0;j<2; j++){
-  //     C[i][j]=0;
-  //     for (int k=0;k<2; k++){
-  //       C[i][j]+=A[i][k] *B[k][j];
-  //     }
-  //   }
-  // }
+  int A[2][2] = { {1, 2}, {3, 4} };
+  int B[2][2] = { {5, 6}, {7, 8} };
+  int C[2][2];
+  for (int i=0;i<2; i++){
+    for (int j=0;j<2; j++){
+      C[i][j]=0;
+      for (int k=0;k<2; k++){
+        C[i][j]+=A[i][k] *B[k][j];
+      }
+    }
+  }
 
   //Task 5 definition
   int num, digit1,digit2, digit3, sum;
@@ -163,70 +163,70 @@ int main(void)
     /* USER CODE END WHILE */
 
     //Task #0
-    // HAL_UART_Transmit(&huart2, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);  // Send string on UART2
-    // HAL_Delay(1000); // 1 sec delay
+    HAL_UART_Transmit(&huart2, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);  // Send string on UART2
+    HAL_Delay(1000); // 1 sec delay
 
     //Task 1 testing
-    // myPrintf("Value of x = %d, y = %.2f\r\n", x, y);
-    // HAL_Delay(1500);
+    myPrintf("Value of x = %d, y = %.2f\r\n", x, y);
+    HAL_Delay(1500);
 
     //Task 2 testing:
     //Task 2 testing:
-      // myPrintf("a = %d, b = %d\r\n", a, b); //print values of a and b
-      // myPrintf("LHS: %d\r\n", LHS); //print values of LHS
-      // myPrintf("RHS: %d\r\n", RHS); //orint values of RHS
+      myPrintf("a = %d, b = %d\r\n", a, b); //print values of a and b
+      myPrintf("LHS: %d\r\n", LHS); //print values of LHS
+      myPrintf("RHS: %d\r\n", RHS); //orint values of RHS
 
-      // if (LHS == RHS) {
-      //     myPrintf("Identity Verified: Yes\r\n\r\n"); //when LHS=RHS
-      // } else {
-      //     myPrintf("Identity Verified: No\r\n\r\n"); //when LHS=/=RHS
-      // }
-      // HAL_Delay(1500);
+      if (LHS == RHS) {
+          myPrintf("Identity Verified: Yes\r\n\r\n"); //when LHS=RHS
+      } else {
+          myPrintf("Identity Verified: No\r\n\r\n"); //when LHS=/=RHS
+      }
+      HAL_Delay(1500);
 
-      //task 3 output
-      // myPrintf("Encrypted string: %s\r\n", encrypted);
-      // myPrintf("Decrypted string: %s\r\n", decrypted);
-      // if (strcmp(str, decrypted) == 0) {
-      //       myPrintf("Matches original\r\n");
-      //   }
-      //   else {
-      //       myPrintf("Not matches original\r\n");
-      //   }
+      // task 3 output
+      myPrintf("Encrypted string: %s\r\n", encrypted);
+      myPrintf("Decrypted string: %s\r\n", decrypted);
+      if (strcmp(str, decrypted) == 0) {
+            myPrintf("Matches original\r\n");
+        }
+        else {
+            myPrintf("Not matches original\r\n");
+        }
 
-      // HAL_Delay(1500);
+      HAL_Delay(1500);
 
       //Task 4 output:
-      // myPrintf("\nMatrix A:\n");
-      // for (int i=0;i<2; i++){
-      //   for (int j=0;j<2; j++){
-      //     myPrintf("%d", A[i][j]);
+      myPrintf("Matrix A:\r\n");
+      for (int i=0; i<2; i++) {
+          for (int j=0; j<2; j++) {
+              myPrintf("%4d ", A[i][j]);
+          }
+          myPrintf("\r\n");
+      }
 
-      //   }
-      //   myPrintf("\n");
-      // }
+      myPrintf("Matrix B:\r\n");
+      for (int i=0; i<2; i++) {
+          for (int j=0; j<2; j++) {
+              myPrintf("%4d ", B[i][j]);
+          }
+          myPrintf("\r\n");
+      }
 
-      // myPrintf("\nMatrix B:\n");
-      // for (int i=0;i<2; i++){
-      //   for (int j=0;j<2; j++){
-      //     myPrintf("%d", B[i][j]);
+      myPrintf("Matrix C (Result = A x B):\r\n");
+      for (int i=0; i<2; i++) {
+          for (int j=0; j<2; j++) {
+              myPrintf("%4d ", C[i][j]);
+          }
+          myPrintf("\r\n");
+      }
 
-      //   }
-      //   myPrintf("\n");
-      // }
 
-      // myPrintf("\nMatrix C (Result=A x B):\n");
-      // for (int i=0;i<2; i++){
-      //   for (int j=0;j<2; j++){
-      //     myPrintf("%d", C[i][j]);
-
-      //   }
-      //   myPrintf("\n");
-      // }
-      // HAL_Delay(1500);
+      HAL_Delay(1500);
 
 
       //Task 5
-      myPrintf("Armstrong numbers between 100 and 999 are:\n");
+      myPrintf("Armstrong numbers between 100 and 999 are:\r\n");
+
       for (num = 100; num <= 999; num++) {
         // Extract digits
         digit1 = num / 100;           // Hundreds place
@@ -240,12 +240,12 @@ int main(void)
 
         // Compare with original number
         if (sum == num) {
-            myPrintf("%d\n", num);
+            myPrintf("%d\r\n", num);
 
         }
-        HAL_Delay(5000);
+        
     }
-
+      HAL_Delay(1500);
 
 
 
