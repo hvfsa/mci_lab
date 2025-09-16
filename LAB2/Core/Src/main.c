@@ -127,7 +127,7 @@ int main(void)
   int LHS=(a + b) * (a + b);
   int RHS= a*a + b*b + 2*a*b;
 
-  //Task 3 definition:
+  // //Task 3 definition:
   char str[] = "Microcontrollers";
   char encrypted[100];
   char decrypted[100];
@@ -155,7 +155,7 @@ int main(void)
     }
   }
 
-  //Task 5 definition
+  // //Task 5 definition
   int num, digit1,digit2, digit3, sum;
 
   while (1)
@@ -163,39 +163,39 @@ int main(void)
     /* USER CODE END WHILE */
 
     //Task #0
-    HAL_UART_Transmit(&huart2, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);  // Send string on UART2
-    HAL_Delay(1000); // 1 sec delay
+    // HAL_UART_Transmit(&huart2, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);  // Send string on UART2
+    // HAL_Delay(500); // 1 sec delay
 
     //Task 1 testing
-    myPrintf("Value of x = %d, y = %.2f\r\n", x, y);
-    HAL_Delay(1500);
+    // myPrintf("Value of x = %d, y = %.2f\r\n", x, y);
+    // HAL_Delay(1000);
 
     //Task 2 testing:
     //Task 2 testing:
-      myPrintf("a = %d, b = %d\r\n", a, b); //print values of a and b
-      myPrintf("LHS: %d\r\n", LHS); //print values of LHS
-      myPrintf("RHS: %d\r\n", RHS); //orint values of RHS
+      // myPrintf("a = %d, b = %d\r\n", a, b); //print values of a and b
+      // myPrintf("LHS: %d\r\n", LHS); //print values of LHS
+      // myPrintf("RHS: %d\r\n", RHS); //orint values of RHS
 
-      if (LHS == RHS) {
-          myPrintf("Identity Verified: Yes\r\n\r\n"); //when LHS=RHS
-      } else {
-          myPrintf("Identity Verified: No\r\n\r\n"); //when LHS=/=RHS
-      }
-      HAL_Delay(1500);
+      // if (LHS == RHS) {
+      //     myPrintf("Identity Verified: Yes\r\n\r\n"); //when LHS=RHS
+      // } else {
+      //     myPrintf("Identity Verified: No\r\n\r\n"); //when LHS=/=RHS
+      // }
+      // HAL_Delay(1500);
 
       // task 3 output
-      myPrintf("Encrypted string: %s\r\n", encrypted);
-      myPrintf("Decrypted string: %s\r\n", decrypted);
-      if (strcmp(str, decrypted) == 0) {
-            myPrintf("Matches original\r\n");
-        }
-        else {
-            myPrintf("Not matches original\r\n");
-        }
+      // myPrintf("Encrypted string: %s\r\n", encrypted);
+      // myPrintf("Decrypted string: %s\r\n", decrypted);
+      // if (strcmp(str, decrypted) == 0) {
+      //       myPrintf("Matches original\r\n");
+      //   }
+      //   else {
+      //       myPrintf("Not matches original\r\n");
+      //   }
 
-      HAL_Delay(1500);
+      // HAL_Delay(1500);
 
-      //Task 4 output:
+    //   //Task 4 output:
       myPrintf("Matrix A:\r\n");
       for (int i=0; i<2; i++) {
           for (int j=0; j<2; j++) {
@@ -224,7 +224,7 @@ int main(void)
       HAL_Delay(1500);
 
 
-      //Task 5
+    //   //Task 5
       myPrintf("Armstrong numbers between 100 and 999 are:\r\n");
 
       for (num = 100; num <= 999; num++) {

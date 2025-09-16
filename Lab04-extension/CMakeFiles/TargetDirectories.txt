@@ -1,0 +1,7 @@
+/home/administrator/mci_lab/Lab04-extension/CMakeFiles/Lab04-extension.dir
+/home/administrator/mci_lab/Lab04-extension/CMakeFiles/edit_cache.dir
+/home/administrator/mci_lab/Lab04-extension/CMakeFiles/rebuild_cache.dir
+/home/administrator/mci_lab/Lab04-extension/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+/home/administrator/mci_lab/Lab04-extension/cmake/stm32cubemx/CMakeFiles/USB_Device_Library.dir
+/home/administrator/mci_lab/Lab04-extension/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+/home/administrator/mci_lab/Lab04-extension/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
