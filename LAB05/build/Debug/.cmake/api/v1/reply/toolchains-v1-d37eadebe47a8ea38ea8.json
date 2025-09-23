@@ -1,0 +1,94 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : {},
+				"path" : "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc",
+				"version" : ""
+			},
+			"language" : "ASM",
+			"sourceFileExtensions" : 
+			[
+				"s",
+				"S",
+				"asm"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/lib/gcc/arm-none-eabi/13.3.1/include",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/lib/gcc/arm-none-eabi/13.3.1/include-fixed",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/arm-none-eabi/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc",
+				"version" : "13.3.1"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/arm-none-eabi/include/c++/13.3.1",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/arm-none-eabi/include/c++/13.3.1/arm-none-eabi/thumb/v7e-m+fp/hard",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/arm-none-eabi/include/c++/13.3.1/backward",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/lib/gcc/arm-none-eabi/13.3.1/include",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/lib/gcc/arm-none-eabi/13.3.1/include-fixed",
+						"/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/arm-none-eabi/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "/home/administrator/st/stm32cubeclt_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-g++",
+				"version" : "13.3.1"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
