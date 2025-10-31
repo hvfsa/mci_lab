@@ -77,11 +77,7 @@ typedef struct {
   float gyro_rot;
 
 } rot_angle_struct_t;
-float acc_angle = 0.0f;
-float gyro_angle = 0.0f;
-float fused_angle = 0.0f;
-float dt = 0.01f;  // 10 ms sampling period (same as your Python delay)
-float gyro_angle_rate = 0.0f;  
+
 rot_angle_struct_t rot_angle_struct;
 
 /* USER CODE END PD */
@@ -182,26 +178,30 @@ void I3G4250D_Calibrate(void)
 
 
 }
-float gyroX_dps = 0.0f; // global gyro angular velocity (degrees per second)
 
 // Read gyro axes with offsets applied
 void read_gyro_axes(void)
 {
-    uint8_t tx[7] = {0x28 | 0xC0};  // start address + auto-increment
-    uint8_t rx[7] = {0};
+    uint8_t buf[7];
+    buf[0] = 0x28 | 0xC0;
 
     HAL_GPIO_WritePin(GPIOE, I3G4250D_CS_PIN, GPIO_PIN_RESET);
-    HAL_SPI_TransmitReceive(&hspi1, tx, rx, 7, HAL_MAX_DELAY);
+    HAL_SPI_TransmitReceive(&hspi1, buf, buf, 7, HAL_MAX_DELAY);
     HAL_GPIO_WritePin(GPIOE, I3G4250D_CS_PIN, GPIO_PIN_SET);
 
-    int16_t gx_raw = (int16_t)(rx[2] << 8 | rx[1]) - gx_offset;
-    int16_t gy_raw = (int16_t)(rx[4] << 8 | rx[3]) - gy_offset;
-    int16_t gz_raw = (int16_t)(rx[6] << 8 | rx[5]) - gz_offset;
+    int16_t gx_raw = (int16_t)(buf[2] << 8 | buf[1]) - gx_offset;
+    int16_t gy_raw = (int16_t)(buf[4] << 8 | buf[3]) - gy_offset;
+    int16_t gz_raw = (int16_t)(buf[6] << 8 | buf[5]) - gz_offset;
 
-    gyroX_dps = gx_raw * 0.00875f;
-    gyro_angle += gyroX_dps * dt;
+    float gx_dps = gx_raw * 0.00875f;
+    float gy_dps = gy_raw * 0.00875f;
+    float gz_dps = gz_raw * 0.00875f;
+    // rot_angle_struct.gyro_rot = gy_dps;
+
+ char uartBuf[80];
+    snprintf(uartBuf, sizeof(uartBuf), "GYRO: %.2f, %.2f, %.2f\r\n", gx_dps, gy_dps, gz_dps);
+    HAL_UART_Transmit(&huart1, (uint8_t*)uartBuf, strlen(uartBuf), HAL_MAX_DELAY);
 }
-
 
 
 
@@ -247,16 +247,18 @@ void LSM303_ReadAccel(void)
     HAL_I2C_Mem_Read(&hi2c1, LSM303AGR_ADDR, OUT_X_L_A | 0x80,
                      I2C_MEMADD_SIZE_8BIT, data, 6, HAL_MAX_DELAY);
 
+    // Combine bytes (little-endian: low byte first)
     lsmData.rawX = (int16_t)(data[1] << 8 | data[0]);
     lsmData.rawY = (int16_t)(data[3] << 8 | data[2]);
     lsmData.rawZ = (int16_t)(data[5] << 8 | data[4]);
 
+    // Convert to m/s² (assuming ±2g range, 1 LSB = 0.000598 m/s²)
     lsmData.accX = lsmData.rawX * 0.000598 - lsmData.offsetX;
     lsmData.accY = lsmData.rawY * 0.000598 - lsmData.offsetY;
     lsmData.accZ = lsmData.rawZ * 0.000598 - lsmData.offsetZ;
 
-    // Calculate accelerometer angle (in degrees)
-    acc_angle = atan2(lsmData.accY, lsmData.accZ) * RAD_TO_DEG;
+    // Store one axis for rotation (example: Y-axis)
+    rot_angle_struct.acc_rot = lsmData.accY;
 }
 
 void LSM303_Offset(void)
@@ -363,22 +365,15 @@ int main(void)
   // HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
     /* USER CODE BEGIN 3 */
      
-while (1)
+    while (1)
 {
     LSM303_ReadAccel();
+    LSM303_Print();
     read_gyro_axes();
-
-    acc_angle = atan2(lsmData.accY, lsmData.accZ) * RAD_TO_DEG;
-
-    fused_angle = 0.98f * (fused_angle + gyroX_dps * dt) + 0.02f * acc_angle;
-
-    char uartBuf[100];
-    snprintf(uartBuf, sizeof(uartBuf), "%.2f,%.2f,%.2f\r\n",
-             lsmData.accX, gyroX_dps, fused_angle);
-    HAL_UART_Transmit(&huart1, (uint8_t*)uartBuf, strlen(uartBuf), HAL_MAX_DELAY);
-
-    HAL_Delay(10);
+    HAL_Delay(200);
 }
+
+
 
   }
   /* USER CODE END 3 */
