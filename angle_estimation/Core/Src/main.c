@@ -26,13 +26,12 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#include "main.h"
-#include "stdio.h"
+#include <stdio.h>
 #include "stm32f303xc.h"
 #include "stm32f3xx_hal_tim.h"
-#include "string.h"
 #include <math.h>
-
+#include <string.h>
+#include <stdarg.h>
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -81,7 +80,7 @@ float gx_offset = 0, gy_offset = 0, gz_offset = 0;
 float gx, gy, gz;
 volatile float gx_raw=0, gy_raw=0, gz_raw=0; // store raw readings
 
-float pitch = 0.0f, roll = 0.0f;
+float roll = 0.0f;
 float ax_g ;
 float ay_g ;
 float az_g ;
@@ -102,13 +101,13 @@ float gy_corrected ;
 float gz_corrected ;
 
 /* ===== PID / control ===== */
-#define DT_DEFAULT      0.01f   // initial assumed controller dt (will compute actual dt from timer)
+#define DT_DEFAULT     0.005f // initial assumed controller dt (will compute actual dt from timer)
 #define OUT_MAX         1000.0f // signed scale for pid_output (for reference)
 #define OUT_MIN        -1000.0f
 #define INTEGRAL_LIMIT  500.0f
 
 float Kp = 8.0f;   // conservative starting gains
-float Ki = 0.0f;
+float Ki = 0.05f;
 float Kd = 0.0f;
 
 float pid_integral = 0.0f;
@@ -121,6 +120,40 @@ volatile uint8_t ctrl_flag = 0;
 volatile uint16_t ctrl_tick = 0;
 uint16_t CTRL_TICKS_PER_PID = 1; // set so that timer_freq / CTRL_TICKS_PER_PID = 1/DT
 float DT = DT_DEFAULT; // actual controller dt (you will compute or set later)
+
+typedef enum {
+    MOTOR_RIGHT = 0,
+    MOTOR_LEFT = 1
+} MotorID;
+
+typedef enum {
+    DIR_FORWARD = 1,
+    DIR_BACKWARD = -1,
+    DIR_BRAKE = 0
+} MotorDirection;
+
+// Define a structure to store PID parameters and state
+typedef struct {
+    float setpoint;  // Target angle (0 degrees for upright)
+    float kp, ki, kd;
+    float integral;
+    float prev_error;
+    float output;    // Output motor speed
+} BalancePID_t;
+
+// Define the balance_pid object globally
+BalancePID_t balance_pid = {
+    .setpoint = 0.0f,  // Target angle (typically 0 degrees = upright)
+    .kp = 8.0f,        // Proportional gain (you can adjust this value)
+    .ki = 0.0f,        // Integral gain
+    .kd = 0.0f,        // Derivative gain
+    .integral = 0.0f,
+    .prev_error = 0.0f,
+    .output = 0.0f
+};
+
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -242,45 +275,30 @@ void I3G4250D_Calibrate(void)
 }
 
 
-void Angleestimate(){
-    // char msg[] = "Angle Estimation Running\r\n";
-    // HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg)-1, HAL_MAX_DELAY);
+void Angleestimate() 
+{
+    // Convert raw to g
+    ax_g = ax_raw * 0.0039f;
+    ay_g = ay_raw * 0.0039f;
+    az_g = az_raw * 0.0039f;
 
-    // --- Convert raw → g ---
-     ax_g = ax_raw * 0.0039f;
-     ay_g = ay_raw * 0.0039f;
-     az_g = az_raw * 0.0039f;
+    // Convert to m/s^2
+    ax_ms2 = ax_g * 9.80665f;
+    ay_ms2 = ay_g * 9.80665f;
+    az_ms2 = az_g * 9.80665f;
 
-    // --- Convert g → m/s² ---
-     ax_ms2 = ax_g * 9.80665f;
-     ay_ms2 = ay_g * 9.80665f;
-     az_ms2 = az_g * 9.80665f;
+    // Gyro offsets removed
+    gx_corrected = gx_raw - gx_offset;
+    gy_corrected = gy_raw - gy_offset;
+    gz_corrected = gz_raw - gz_offset;
 
-    // --- Print values ---
-    // char msg2[100];
-    // snprintf(msg2, sizeof(msg2), "%.2f,%.2f,%.2f\r\n", ax_ms2, ay_ms2, az_ms2);
-    // HAL_UART_Transmit(&huart1, (uint8_t*)msg2, strlen(msg2), HAL_MAX_DELAY);
-
-
-     gx_corrected = gx_raw - gx_offset;
-     gy_corrected = gy_raw - gy_offset;
-     gz_corrected = gz_raw - gz_offset;
-
-
-        // ----- Compute angle from accelerometer -----
-    
+    // --- Your chosen axes ---
     float roll_acc  = atan2f(-ax_ms2, az_ms2) * 57.2958f;
+    float roll_gyro = roll + gy_corrected * DT;
 
-    // ----- Gyroscope integration (dt = 0.1s because 10Hz UART update) -----
-    
-    float pitch_gyro = pitch + gx_corrected * DT;
-    float roll_gyro  = roll  + gx_corrected * DT;
-
-    // ----- Complementary filter -----
-    
-    roll  = 0.98f * roll_gyro  + 0.02f * roll_acc;
+    // Complementary filter
+    roll = 0.98f * roll_gyro + 0.02f * roll_acc;
 }
-
 
 
 float PID_Update(float measurement)
@@ -304,6 +322,109 @@ float PID_Update(float measurement)
     pid_prev_error = error;
     pid_output = out;
     return out;
+}
+
+
+
+void Motor_SetDirection(MotorID motor, MotorDirection dir) {
+    if (motor == MOTOR_RIGHT) {
+        if (dir == DIR_FORWARD) {
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);   // AIN1 = 1
+            HAL_GPIO_WritePin(GPIOF, GPIO_PIN_4, GPIO_PIN_RESET); // AIN2 = 0
+        } else if (dir == DIR_BACKWARD) {
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET); // AIN1 = 0
+            HAL_GPIO_WritePin(GPIOF, GPIO_PIN_4, GPIO_PIN_SET);   // AIN2 = 1
+        } else { // BRAKE
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOF, GPIO_PIN_4, GPIO_PIN_RESET);
+        }
+    } else if (motor == MOTOR_LEFT) {
+        if (dir == DIR_FORWARD) {
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);   // BIN1 = 1
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_RESET); // BIN2 = 0
+        } else if (dir == DIR_BACKWARD) {
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET); // BIN1 = 0
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);   // BIN2 = 1
+        } else { // BRAKE
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_RESET);
+        }
+    }
+}
+
+
+
+
+
+void Motor_SetPWM(MotorID motor, uint16_t pwm_value) {
+    // Clamp to max PWM value
+    if (pwm_value > 1000)
+        pwm_value = 1000;
+
+    // Scale to TIM3 period (65535 for the 16-bit timer)
+    uint32_t compare = (pwm_value * 65535) / 1000;
+
+    if (motor == MOTOR_RIGHT) {
+        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, compare);  // Control the right motor
+    } else if (motor == MOTOR_LEFT) {
+        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, compare);  // Control the left motor
+    }
+}
+
+
+
+
+void Motor_SetSpeed(MotorID motor, int16_t speed) {
+    if (speed > 0) {
+        Motor_SetDirection(motor, DIR_FORWARD);
+        Motor_SetPWM(motor, speed);  // Set positive speed (forward)
+    } else if (speed < 0) {
+        Motor_SetDirection(motor, DIR_BACKWARD);
+        Motor_SetPWM(motor, -speed); // Set negative speed (backward)
+    } else {
+        Motor_SetDirection(motor, DIR_BRAKE);
+        Motor_SetPWM(motor, 0);  // Stop the motor
+    }
+}
+
+//PID compute function for balancing
+float Balance_PID_Compute(BalancePID_t *pid, float angle, float dt) {
+    // Calculate the error (difference between target and current angle)
+    float error = pid->setpoint - angle;
+
+    // Deadband - stop if nearly balanced
+    if (fabsf(error) < 1.0f) {  // Allow ±1 degree
+    pid->integral = 0.0f;
+    pid->prev_error = error;
+    return 0.0f;
+}
+
+
+    // Integral with anti-windup
+    pid->integral += error * dt;
+    if (pid->integral > 50.0f)
+        pid->integral = 50.0f;  // Limit integral to avoid windup
+    if (pid->integral < -50.0f)
+        pid->integral = -50.0f;
+
+    // Derivative term
+    float derivative = (error - pid->prev_error) / dt;
+    pid->prev_error = error;
+
+    // PID output (motor speed)
+    float output = pid->kp * error + pid->ki * pid->integral + pid->kd * derivative;
+
+    // Clamp the output to PWM range
+    if (output > 999.0f)
+        output = 999.0f;
+    if (output < -999.0f)
+        output = -999.0f;
+
+    // PWM deadband (to avoid small motor movements)
+    if (fabsf(output) < 20.0f)
+        output = 0.0f;
+
+    return output;
 }
 
 
@@ -382,9 +503,12 @@ pid_prev_error=0.0f;
 pid_output=0.0f;
 
 HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+
 uint32_t period = htim3.Init.Period; // 65535 in your config
 uint32_t pulse = (period + 1) / 2;
 __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pulse);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -395,25 +519,40 @@ while (1)
 
     /* USER CODE BEGIN 3 */
       if (ctrl_flag) {
-        ctrl_flag = 0;
-        float control = PID_Update(roll); // use pitch or roll
-        // do not drive motors yet — just set LEDs or debug PWM magnitude if you want
-        // Example: show sign on PA9/PA8 (or other pins)
-        if (control >= 0) {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
-        } else {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-        }
-    }
+    ctrl_flag = 0;
 
+    //float control = Balance_PID_Compute(&balance_pid, roll, DT);  // Get PID output for roll
+    float control = PID_Update(roll);  // Get PID output for roll
+    // Apply motor control based on PID output
+    Motor_SetSpeed(MOTOR_LEFT,  (int16_t)control);
+    Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control);
+
+    // if (control >= 0) {
+    //     Motor_SetSpeed(MOTOR_LEFT, (int16_t)control);  // Apply control output to the left motor
+    //     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control); // Apply control output to the right motor
+    // } else {
+    //     Motor_SetSpeed(MOTOR_LEFT, (int16_t)-control); // Apply opposite speed to go backward
+    //     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)-control);
+    // }
+}
     if (uart_flag) {
     uart_flag = 0;
     char cvMsg[120];
     float error = setpoint_angle - roll;
     snprintf(cvMsg, sizeof(cvMsg), "%.2f,%.2f,%.2f\r\n", roll, error, pid_output);
-    HAL_UART_Transmit(&huart1, (uint8_t*)cvMsg, strlen(cvMsg), HAL_MAX_DELAY);
-
+    HAL_UART_Transmit(&huart2, (uint8_t*)cvMsg, strlen(cvMsg), HAL_MAX_DELAY);
+ 
 }
+//   if (ctrl_flag)
+// {
+//     ctrl_flag = 0;
+
+//     float control = Balance_PID_Compute(&balance_pid, roll, DT);
+
+//     Motor_SetSpeed(MOTOR_LEFT,  (int16_t)control);
+//     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control);
+// }
+
 
 
   }
