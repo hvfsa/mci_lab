@@ -101,14 +101,14 @@ float gy_corrected ;
 float gz_corrected ;
 
 /* ===== PID / control ===== */
-#define DT_DEFAULT     0.005f // initial assumed controller dt (will compute actual dt from timer)
+#define DT_DEFAULT     0.01f // initial assumed controller dt (will compute actual dt from timer)
 #define OUT_MAX         1000.0f // signed scale for pid_output (for reference)
 #define OUT_MIN        -1000.0f
 #define INTEGRAL_LIMIT  500.0f
 
-float Kp = 8.0f;   // conservative starting gains
-float Ki = 0.05f;
-float Kd = 0.0f;
+float Kp = 30.0f;   // Much more aggressive
+float Ki = 0.0f;    // Start with zero, add later
+float Kd = 5.0f;    // Essential for damping oscillations
 
 float pid_integral = 0.0f;
 float pid_prev_error = 0.0f;
@@ -144,9 +144,9 @@ typedef struct {
 // Define the balance_pid object globally
 BalancePID_t balance_pid = {
     .setpoint = 0.0f,  // Target angle (typically 0 degrees = upright)
-    .kp = 8.0f,        // Proportional gain (you can adjust this value)
+    .kp = 30.0f,        // Proportional gain (you can adjust this value)
     .ki = 0.0f,        // Integral gain
-    .kd = 0.0f,        // Derivative gain
+    .kd = 5.0f,        // Derivative gain
     .integral = 0.0f,
     .prev_error = 0.0f,
     .output = 0.0f
@@ -169,6 +169,10 @@ static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 volatile uint8_t uart_flag = 0;
 volatile uint16_t tick_count = 0;
+/* --- Bluetooth Command System --- */
+volatile char bt_rx;
+volatile uint8_t bt_new_cmd = 0;
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -293,17 +297,17 @@ void Angleestimate()
     gz_corrected = gz_raw - gz_offset;
 
     // --- Your chosen axes ---
-    float roll_acc  = atan2f(-ax_ms2, az_ms2) * 57.2958f;
+    float roll_acc  = atan2f(ax_ms2, az_ms2) * 57.2958f;
     float roll_gyro = roll + gy_corrected * DT;
 
     // Complementary filter
-    roll = 0.98f * roll_gyro + 0.02f * roll_acc;
+    roll = 0.96f * roll_gyro + 0.04f * roll_acc;
 }
 
 
 float PID_Update(float measurement)
 {
-    float error = setpoint_angle - measurement; // setpoint - measurement
+    float error = measurement - setpoint_angle;  // ✓ CORRECT // setpoint - measurement
 
     // Integral (anti-windup)
     pid_integral += error * DT;
@@ -357,18 +361,21 @@ void Motor_SetDirection(MotorID motor, MotorDirection dir) {
 
 
 void Motor_SetPWM(MotorID motor, uint16_t pwm_value) {
-    // Clamp to max PWM value
+    // Clamp to max
     if (pwm_value > 1000)
-        pwm_value = 1000;
+    pwm_value = 1000;
 
-    // Scale to TIM3 period (65535 for the 16-bit timer)
+    // Scale to TIM3 period (65535)
     uint32_t compare = (pwm_value * 65535) / 1000;
 
-    if (motor == MOTOR_RIGHT) {
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, compare);  // Control the right motor
-    } else if (motor == MOTOR_LEFT) {
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, compare);  // Control the left motor
+    if (motor == MOTOR_RIGHT)
+    {
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, compare);
     }
+    else if (motor == MOTOR_LEFT)
+    {
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, compare);
+}
 }
 
 
@@ -389,44 +396,55 @@ void Motor_SetSpeed(MotorID motor, int16_t speed) {
 
 //PID compute function for balancing
 float Balance_PID_Compute(BalancePID_t *pid, float angle, float dt) {
-    // Calculate the error (difference between target and current angle)
     float error = pid->setpoint - angle;
 
+
     // Deadband - stop if nearly balanced
-    if (fabsf(error) < 1.0f) {  // Allow ±1 degree
+    if (fabsf(error) < 0.3f)
+    {
     pid->integral = 0.0f;
     pid->prev_error = error;
-    return 0.0f;
-}
-
+    return 0.0f; // Stop motors when balanced
+    }
 
     // Integral with anti-windup
     pid->integral += error * dt;
     if (pid->integral > 50.0f)
-        pid->integral = 50.0f;  // Limit integral to avoid windup
+    pid->integral = 50.0f;
     if (pid->integral < -50.0f)
-        pid->integral = -50.0f;
+    pid->integral = -50.0f;
 
-    // Derivative term
+    // Derivative
     float derivative = (error - pid->prev_error) / dt;
     pid->prev_error = error;
 
-    // PID output (motor speed)
-    float output = pid->kp * error + pid->ki * pid->integral + pid->kd * derivative;
+    // PID output (PWM value)
+    float output = pid->kp * error +
+    pid->ki * pid->integral +
+    pid->kd * derivative;
 
-    // Clamp the output to PWM range
+    // Limit to PWM range
     if (output > 999.0f)
-        output = 999.0f;
+    output = 999.0f;
     if (output < -999.0f)
-        output = -999.0f;
+    output = -999.0f;
 
-    // PWM deadband (to avoid small motor movements)
-    if (fabsf(output) < 20.0f)
-        output = 0.0f;
+    // PWM deadband
+    if (fabsf(output) < 100.0f)
+    output = 0.0f;
 
     return output;
 }
 
+uint8_t Is_Fallen(float angle)
+{
+  // If angle is beyond ±45 degrees, robot has fallen
+  if (fabsf(angle) > 45.0f)
+  {
+  return 1; // Fallen
+  }
+  return 0; // Still balancing
+}
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -454,6 +472,59 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     
   }
 }
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART1)   // Bluetooth UART
+    {
+        bt_new_cmd = 1;  // Mark new command received
+
+        // Restart interrupt reception
+        HAL_UART_Receive_IT(&huart1, (uint8_t *)&bt_rx, 1);
+    }
+}
+
+void Process_BT_Command(char cmd)
+{
+    switch(cmd)
+    {
+        case 'F':   // Move forward
+            balance_pid.setpoint = -5.0f;
+            HAL_UART_Transmit(&huart1, (uint8_t*)"FORWARD\r\n", 9, 100);
+            break;
+
+        case 'B':   // Move backward
+            balance_pid.setpoint = 5.0f;
+            HAL_UART_Transmit(&huart1, (uint8_t*)"BACK\r\n", 6, 100);
+            break;
+
+        case 'L':   // Turn left
+            Motor_SetSpeed(MOTOR_LEFT, -200);
+            Motor_SetSpeed(MOTOR_RIGHT,  200);
+            HAL_Delay(100);
+            HAL_UART_Transmit(&huart1, (uint8_t*)"LEFT\r\n", 6, 100);
+            break;
+
+        case 'R':   // Turn right
+            Motor_SetSpeed(MOTOR_LEFT, 200);
+            Motor_SetSpeed(MOTOR_RIGHT,-200);
+            HAL_Delay(100);
+            HAL_UART_Transmit(&huart1, (uint8_t*)"RIGHT\r\n", 7, 100);
+            break;
+
+        case 'S':   // Stop robot
+            balance_pid.setpoint = 0.0f;
+            Motor_SetSpeed(MOTOR_LEFT, 0);
+            Motor_SetSpeed(MOTOR_RIGHT, 0);
+            HAL_UART_Transmit(&huart1, (uint8_t*)"STOP\r\n", 6, 100);
+            break;
+
+        default:
+            HAL_UART_Transmit(&huart1, (uint8_t*)"UNKNOWN\r\n", 9, 100);
+            break;
+    }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -470,7 +541,10 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+
+
+
+HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -496,7 +570,7 @@ int main(void)
 LSM303AGR_Init();
 I3G4250D_Init();
 I3G4250D_Calibrate(); 
-HAL_TIM_Base_Start_IT(&htim2); //start interrupt timer
+
 
 pid_integral=0.0f;
 pid_prev_error=0.0f;
@@ -509,6 +583,20 @@ uint32_t period = htim3.Init.Period; // 65535 in your config
 uint32_t pulse = (period + 1) / 2;
 __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pulse);
 
+__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 32768); // 50% of 65535
+__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 32768);
+Motor_SetSpeed(MOTOR_LEFT, 0);
+Motor_SetSpeed(MOTOR_RIGHT, 0);
+
+HAL_TIM_Base_Start_IT(&htim2); //start interrupt timer
+
+
+
+char msg[100];
+snprintf(msg, sizeof(msg), "Balancer Started - Kp:%.1f Ki:%.1f Kd:%.1f\r\n", Kp, Ki, Kd);
+HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+HAL_UART_Receive_IT(&huart2, (uint8_t *)&bt_rx, 1);   // Start receiving 1-byte commands from Bluetooth
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -518,40 +606,63 @@ while (1)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      if (ctrl_flag) {
-    ctrl_flag = 0;
+    // === 10ms Control Loop (100Hz) ===
+    
+snprintf(msg, sizeof(msg), "Balancer Started - Kp:%.1f Ki:%.1f Kd:%.1f\r\n", Kp, Ki, Kd);
+    HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+HAL_UART_Receive_IT(&huart2, (uint8_t *)&bt_rx, 1);   // Start receiving 1-byte commands from Bluetooth
 
-    //float control = Balance_PID_Compute(&balance_pid, roll, DT);  // Get PID output for roll
-    float control = PID_Update(roll);  // Get PID output for roll
-    // Apply motor control based on PID output
-    Motor_SetSpeed(MOTOR_LEFT,  (int16_t)control);
-    Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control);
-
-    // if (control >= 0) {
-    //     Motor_SetSpeed(MOTOR_LEFT, (int16_t)control);  // Apply control output to the left motor
-    //     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control); // Apply control output to the right motor
-    // } else {
-    //     Motor_SetSpeed(MOTOR_LEFT, (int16_t)-control); // Apply opposite speed to go backward
-    //     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)-control);
-    // }
+    if (bt_new_cmd)
+{
+    bt_new_cmd = 0;
+    Process_BT_Command(bt_rx);
 }
-    if (uart_flag) {
-    uart_flag = 0;
-    char cvMsg[120];
-    float error = setpoint_angle - roll;
-    snprintf(cvMsg, sizeof(cvMsg), "%.2f,%.2f,%.2f\r\n", roll, error, pid_output);
-    HAL_UART_Transmit(&huart2, (uint8_t*)cvMsg, strlen(cvMsg), HAL_MAX_DELAY);
+
+uint32_t now = HAL_GetTick();
+static uint32_t last_control_time = 0;
+
+if (now - last_control_time >= 10) // 100Hz control
+{
+last_control_time = now;
+DT  = 0.01f; // 10ms = 0.01s
+
+// --- SAFETY CHECK ---
+if (Is_Fallen(roll))
+{
+Motor_SetSpeed(MOTOR_LEFT, 0);
+Motor_SetSpeed(MOTOR_RIGHT, 0);
+balance_pid.integral = 0.0f;
+printf("FALLEN! Angle: %.1f\r\n", roll);
+continue;
+}
+
+// --- Balance PID (Angle -> PWM) ---
+float pwm = Balance_PID_Compute(&balance_pid, roll, DT);
+
+// Apply same PWM to both motors
+Motor_SetSpeed(MOTOR_LEFT, (int16_t)pwm);
+Motor_SetSpeed(MOTOR_RIGHT, (int16_t)pwm);
+
+// --- Debug Output with Error ---
+static uint8_t print_counter = 0;
+print_counter++;
+if (print_counter >= 10) // Print every 100ms
+{
+print_counter = 0;
+float error = balance_pid.setpoint - roll;
+printf("Ang:%.2f | Err:%.2f | PWM:%.0f | I:%.2f\r\n",
+roll, error, pwm, balance_pid.integral);
+}
+}
+
+
+
+
+
+      
  
-}
-//   if (ctrl_flag)
-// {
-//     ctrl_flag = 0;
 
-//     float control = Balance_PID_Compute(&balance_pid, roll, DT);
 
-//     Motor_SetSpeed(MOTOR_LEFT,  (int16_t)control);
-//     Motor_SetSpeed(MOTOR_RIGHT, (int16_t)control);
-// }
 
 
 
